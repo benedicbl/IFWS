@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Screenshot</title>
+    <link rel="stylesheet" href="upload_screenshot.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <div class="app-layout">
+        <nav class="sidebar">
+        </nav>
+
+        <main class="main-content">
+            <h1>Upload Screenshot zoom</h1>
+
+            <div id="webinar-details" class="webinar-details">
+                <h2 id="webinar-topic">Memuat...</h2>
+                <p id="webinar-speaker"></p>
+                <p id="webinar-type"></p>
+                <p id="webinar-date"></p>
+            </div>
+
+            <h3 class="section-title">Screenshots</h3>
+            <div class="screenshot-area">
+                <div class="screenshot-actions">
+                    <button id="upload-button" class="btn btn-outline">Upload Screenshot</button>
+                    <input type="file" id="file-input" multiple accept="image/*" style="display: none;">
+                </div>
+                <div id="previews-container" class="previews-container">
+                </div>
+            </div>
+
+            <div class="page-actions">
+                <a href="riwayat.html" class="btn btn-kembali">Kembali</a>
+                <button id="save-button" class="btn btn-simpan">Simpan</button>
+            </div>
+        </main>
+    </div>
+    <script src="upload_screenshot_script.js"></script>
+</body>
+</html>
