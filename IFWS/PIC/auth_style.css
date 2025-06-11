@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+:root {
+    --auth-primary-blue: #4285F4;
+    --auth-primary-blue-hover: #357ae8;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+    overflow: hidden;
+    /* Latar belakang diubah menjadi warna biru solid */
+    background-color: var(--auth-primary-blue);
+}
+
+/* --- Halaman Depan (index.html) --- */
+.landing-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    color: white;
+    padding: 0 10%;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.landing-logo {
+    width: 100px;
+    height: auto;
+    background: white;
+    border-radius: 12px;
+    padding: 10px;
+}
+
+.logo-section h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.btn {
+    padding: 12px 35px;
+    border: 2px solid white;
+    border-radius: 8px;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-login:hover {
+    background-color: white;
+    color: var(--auth-primary-blue);
+}
+
+/* --- Halaman Login (login.html) --- */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-card {
+    /* Backdrop-filter tidak lagi memberi efek blur, tapi tetap memberi efek kaca */
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    padding: 3rem;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.form-logo {
+    width: 80px;
+    height: auto;
+    background: white;
+    border-radius: 12px;
+    padding: 8px;
+    margin-bottom: 2rem;
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 1.5rem;
+}
+
+.input-group label {
+    display: block;
+    color: white;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid transparent;
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Tombol login diubah agar kontras dengan background */
+.btn-form-login {
+    width: 100%;
+    padding: 12px;
+    background: #ffffff;
+    color: var(--auth-primary-blue);
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 700; /* Dibuat lebih tebal */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-form-login:hover {
+    background-color: #f0f0f0; /* Efek hover menjadi sedikit abu-abu */
+}
