@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Narasumber</title>
+    <link rel="stylesheet" href="list_narasumber.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+    <div class="app-layout">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <a href="homepage.html"><img src="../assets/Logo.jpg" alt="Logo IFWS" class="sidebar-logo"></a>
+            </div>
+            <ul class="sidebar-nav">
+                <li class="link-list-ifws">
+                    <a href="list_IFWS.html" title="List IFWS"><i class="fa-solid fa-list-ul fa-lg"></i></a>
+                </li>
+                <li class="link-riwayat">
+                    <a href="riwayat.html" title="Riwayat & Upload Screenshot"><i
+                            class="fa-solid fa-chart-line fa-lg"></i></a>
+                </li>
+                <li class="link-narasumber">
+                    <a href="list_narasumber.html" title="List Narasumber"><i
+                            class="fa-solid fa-chalkboard-user fa-lg"></i></a>
+                </li>
+                <li class="link-anggota">
+                    <a href="list_anggota.html" title="List Anggota"><i class="fa-solid fa-users fa-lg"></i></a>
+                </li>
+            </ul>
+            <ul class="sidebar-footer">
+                <li><a href="#" title="Profil"><i class="fa-solid fa-user-circle fa-lg"></i></a></li>
+                <li><a href="#" title="Dokumen"><i class="fa-regular fa-file-lines fa-lg"></i></a></li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <header class="main-header">
+                <h1>List Narasumber</h1>
+                <a href="tambah_narasumber.html" class="btn btn-tambah">
+                    <i class="fa-solid fa-plus"></i> Tambah Narasumber
+                </a>
+            </header>
+
+            <div class="page-controls">
+                <div class="search-container">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Cari narasumber berdasarkan nama atau email...">
+                </div>
+                <button id="toggleEditBtn" class="btn btn-secondary">Edit</button>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nama Narasumber</th>
+                            <th>Email</th>
+                            <th class="actions-header hidden">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="narasumber-table-body">
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    <script src="list_narasumber.js"></script>
+</body>
+
+</html>

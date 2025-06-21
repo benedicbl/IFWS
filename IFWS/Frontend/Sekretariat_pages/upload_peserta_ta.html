@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Peserta TA</title>
+    <link rel="stylesheet" href="upload_peserta_ta.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body class="page-peserta-ta">
+    <div class="app-layout">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <a href="../homepage.html"><img src="../assets/Logo.jpg" alt="Logo IFWS" class="sidebar-logo"></a>
+            </div>
+            <ul class="sidebar-nav">
+                <li class="link-list-ifws"><a href="list_ifws_sekretariat.html"><i class="fa-solid fa-list-ul fa-lg"></i></a></li>
+                <li class="link-peserta-ta"><a href="peserta_ta.html"><i class="fa-solid fa-chalkboard-user fa-lg"></i></a></li>
+                <li class="link-sertifikat"><a href="sertifikat.html"><i class="fa-solid fa-award fa-lg"></i></a></li>
+            </ul>
+             <ul class="sidebar-footer">
+                <li><a href="#"><i class="fa-solid fa-user-circle fa-lg"></i></a></li>
+                <li><a href="#"><i class="fa-regular fa-file-lines fa-lg"></i></a></li>
+            </ul>
+        </nav>
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Upload Data Peserta TA</h1>
+                <div class="header-actions">
+                    <button id="upload-ta1-btn" class="btn btn-outline"><i class="fa-solid fa-upload"></i> Upload CSV TA 1</button>
+                    <button id="upload-ta2-btn" class="btn btn-outline"><i class="fa-solid fa-upload"></i> Upload CSV TA 2</button>
+                    <input type="file" id="csv-input" accept=".csv" style="display: none;">
+                </div>
+            </header>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nama</th>
+                            <th>NPM</th>
+                            <th>Jenis TA</th>
+                        </tr>
+                    </thead>
+                    <tbody id="upload-preview-body"></tbody>
+                </table>
+                <div id="preview-empty-state" class="empty-state">
+                    <p>Silakan upload file CSV untuk melihat pratinjau data.</p>
+                </div>
+            </div>
+            <div class="page-actions">
+                <a href="peserta_ta.html" class="btn btn-kembali">Kembali</a>
+                <button id="add-data-btn" class="btn btn-simpan">Tambah</button>
+            </div>
+        </main>
+    </div>
+    <script src="upload_peserta_ta_script.js"></script>
+    <script src="sidebar.js"></script>
+</body>
+</html>
