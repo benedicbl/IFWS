@@ -1,0 +1,73 @@
+<?php include '../../includes/auth_check.php'; ?>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Bukti Pembayaran</title>
+    <link rel="stylesheet" href="/proyek-ifws/assets/css/Bendahara/form_upload_pembayaran.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body class="page-upload-pembayaran">
+    <div class="app-layout">
+        <?php include '../../includes/sidebar.php'; // Memanggil sidebar ?>
+        <main class="main-content">
+            <h1>Upload Bukti Pembayaran</h1>
+            <div class="webinar-info-header">
+                <p id="info-topik">Memuat data webinar...</p>
+            </div>
+
+            <h3 class="table-title">Narasumber</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nama Narasumber</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="narasumber-table-body"></tbody>
+                </table>
+            </div>
+
+            <h3 class="table-title">Panitia</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nama Anggota</th>
+                            <th>Jabatan</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="panitia-table-body"></tbody>
+                </table>
+            </div>
+
+            <div class="page-actions">
+                <a href="upload_pembayaran.php" class="btn btn-kembali">Kembali</a>
+                <button id="save-btn" class="btn btn-simpan">Simpan</button>
+            </div>
+        </main>
+    </div>
+
+    <div id="upload-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h3>Upload Bukti Pembayaran</h3>
+            <p>Untuk: <strong id="modal-person-name"></strong></p>
+            <div class="form-group">
+                <label for="bukti-file-input">Pilih file (JPG, PNG, PDF):</label>
+                <input type="file" id="bukti-file-input" accept="image/jpeg, image/png, application/pdf">
+            </div>
+            <div class="modal-actions">
+                <button id="cancel-modal-btn" class="btn btn-kembali">Batal</button>
+                <button id="save-bukti-btn" class="btn btn-simpan">Upload Bukti</button>
+            </div>
+        </div>
+    </div>
+    <script src="/proyek-ifws/assets/js/Bendahara/form_upload_pembayaran_script.js"></script>
+</body>
+</html>
