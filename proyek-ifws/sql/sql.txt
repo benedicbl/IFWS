@@ -1,6 +1,6 @@
 -- Menonaktifkan pemeriksaan kunci asing sementara untuk menghindari error saat membuat tabel
 SET FOREIGN_KEY_CHECKS=0;
-
+DROP TABLE IF EXISTS `ifws`;
 --
 -- Struktur Tabel untuk `jenis_ifws`
 --
@@ -34,9 +34,9 @@ CREATE TABLE `ifws` (
   `link_webinar` varchar(255) DEFAULT NULL,
   `jam_mulai` time DEFAULT NULL,
   `jam_selesai` time DEFAULT NULL,
-  `sertifikat_peserta` varchar(255) DEFAULT NULL,
-  `sertifikat_narasumber` varchar(255) DEFAULT NULL,
-  `poster` varchar(255) DEFAULT NULL,
+  `sertifikat_peserta` LONGBLOB DEFAULT NULL,
+  `sertifikat_narasumber` LONGBLOB DEFAULT NULL,
+  `poster` LONGBLOB DEFAULT NULL,
   `status_rekap` enum('tersedia','tidak_tersedia') DEFAULT 'tidak_tersedia',
   PRIMARY KEY (`id`),
   KEY `fk_ifws_jenis` (`id_jenis_ifws`),
@@ -47,11 +47,12 @@ CREATE TABLE `ifws` (
 -- Data Dummy untuk Tabel `ifws`
 --
 INSERT INTO `ifws` (`id`, `topik_webinar`, `id_jenis_ifws`, `tahun_akd`, `semester_akd`, `tanggal`, `link_webinar`, `jam_mulai`, `jam_selesai`, `sertifikat_peserta`, `sertifikat_narasumber`, `poster`, `status_rekap`) VALUES
-(1, 'Introduction To 3D Computer Vision', 2, '2023/2024', 'Ganjil', '2023-01-01', 'ifws.co/ifws', '13:00:00', '14:00:00', 'template1.png', 'template1.png', 'poster.png', 'tersedia'),
-(2, 'Automation in Tech Industry', 3, '2023/2024', 'Ganjil', '2023-02-01', 'ifws.co/ifws', '13:00:00', '14:00:00', 'template2.png', 'template2.png', 'poster.png', 'tersedia'),
-(3, 'Real-World Examples of Cloud Reliability', 1, '2023/2024', 'Genap', '2023-03-01', 'ifws.co/ifws', '13:00:00', '14:00:00', 'template3.png', 'template3.png', 'poster.png', 'tidak_tersedia'),
-(4, 'Dunia ERP dan Odoo', 1, '2023/2024', 'Genap', '2023-04-01', 'ifws.co/ifws', '13:00:00', '14:00:00', 'template4.png', 'template4.png', 'poster.png', 'tersedia'),
-(5, 'The Future of Quantum Computing and Its Impact', 4, '2023/2024', 'Genap', '2025-10-11', 'ifws.co/ifws', '13:00:00', '14:00:00', 'template4.png', 'template4.png', 'poster.png', 'tidak_tersedia');
+(1, 'Introduction To 3D Computer Vision', 2, '2023/2024', 'Ganjil', '2023-01-01', 'ifws.co/ifws', '13:00:00', '14:00:00', NULL, NULL, NULL, 'tersedia'),
+(2, 'Automation in Tech Industry', 3, '2023/2024', 'Ganjil', '2023-02-01', 'ifws.co/ifws', '13:00:00', '14:00:00', NULL, NULL, NULL, 'tersedia'),
+(3, 'Real-World Examples of Cloud Reliability', 1, '2023/2024', 'Genap', '2023-03-01', 'ifws.co/ifws', '13:00:00', '14:00:00', NULL, NULL, NULL, 'tidak_tersedia'),
+(4, 'Dunia ERP dan Odoo', 1, '2023/2024', 'Genap', '2023-04-01', 'ifws.co/ifws', '13:00:00', '14:00:00', NULL, NULL, NULL, 'tersedia'),
+(5, 'The Future of Quantum Computing and Its Impact', 4, '2023/2024', 'Genap', '2025-10-11', 'ifws.co/ifws', '13:00:00', '14:00:00', NULL, NULL, NULL, 'tidak_tersedia'),
+(6, 'Sistem Informasi Pengelola Laporan Banjir di Wilayah Sungai Citarum Hulu (SIPBANJA)', 2, '2024/2025', 'Genap', '2025-05-30', NULL, '10:45:00', '11:45:00',NULL, NULL, NULL, 'tersedia');
 
 --
 -- Struktur Tabel untuk `role`

@@ -2,14 +2,17 @@
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Teknisi -  IFWS</title>
+    <title>Homepage Peserta - IFWS</title>
     <link rel="stylesheet" href="/proyek-ifws/assets/css/homepage_style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
+
 <body>
+
     <div class="container">
         <header class="page-header">
             <div class="user-info">
@@ -35,21 +38,18 @@
             </div>
 
             <nav class="menu-navigation">
-                <a href="list_ifws_teknisi.php" class="menu-card">
+                <a href="list_ifws_peserta.php" class="menu-card">
                     <i class="fa-solid fa-list-ul"></i>
                     <span>List IFWS</span>
                 </a>
-                <a href="pengaturan_kehadiran.php" class="menu-card">
-                    <i class="fa-solid fa-user-clock"></i>
-                    <span>Pengaturan Kehadiran</span>
-                </a>
-                <a href="pengaturan_sidang.php" class="menu-card">
-                    <i class="fa-solid fa-user-graduate"></i>
-                    <span>Pengaturan Sidang</span>
+                <a href="riwayat_peserta.php" class="menu-card">
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                    <span>Riwayat IFWS</span>
                 </a>
             </nav>
         </main>
     </div>
-    
+
 </body>
+
 </html>
