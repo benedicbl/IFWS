@@ -6,7 +6,7 @@
     $role_id = $_SESSION['role_id'] ?? 1; 
 
     // Tentukan URL homepage default
-    $homepage_url = '/proyek-ifws/pages/User/homepage_user.php'; 
+    $homepage_url = '/proyek-ifws/pages/User/homepage_peserta.php'; 
     // Jika role adalah PIC
     if ($role_id == 2) {
         $homepage_url = '/proyek-ifws/pages/PIC/homepage_pic.php';
@@ -90,20 +90,17 @@
         ?>
             <li class="<?php echo ($current_page == 'list_ifws_promosi.php') ? 'active' : ''; ?>">
                     <a href="/proyek-ifws/pages/Promosi/list_ifws_promosi.php" title="List IFWS"><i class="fa-solid fa-list-ul fa-lg"></i></a>
-                </li>
+            </li>
             <?php
         // Menu untuk page user
         else :
         ?>
-            <!-- <li class="<?php echo ($current_page == 'list_ifws_teknisi.php') ? 'active' : ''; ?>">
-                <a href="/proyek-ifws/pages/Teknisi/list_ifws_teknisi.php" title="List IFWS"><i class="fa-solid fa-list-ul fa-lg"></i></a>
+            <li class="<?php echo ($current_page == 'list_ifws_peserta.php') ? 'active' : ''; ?>">
+                    <a href="/proyek-ifws/pages/User/list_ifws_peserta.php" title="List IFWS"><i class="fa-solid fa-list-ul fa-lg"></i></a>
             </li>
-            <li class="<?php echo ($current_page == 'pengaturan_kehadiran.php') ? 'active' : ''; ?>">
-                <a href="/proyek-ifws/pages/Teknisi/pengaturan_kehadiran.php" title="Pengaturan Kehadiran"><i class="fa-solid fa-user-clock fa-lg"></i></a>
+            <li class="<?php echo ($current_page == 'riwayat_peserta.php') ? 'active' : ''; ?>">
+                    <a href="/proyek-ifws/pages/User/riwayat_peserta.php" title="Riwayat IFWS"><i class="fa-solid fa-user-circle fa-lg"></i></a>
             </li>
-            <li class="<?php echo ($current_page == 'pengaturan_sidang.php') ? 'active' : ''; ?>">
-                <a href="/proyek-ifws/pages/Teknisi/pengaturan_sidang.php" title="Pengaturan Sidang"><i class="fa-solid fa-user-graduate fa-lg"></i></a>
-            </li> -->
         <?php
         endif;
         ?>

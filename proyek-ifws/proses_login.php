@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Arahkan pengguna ke halaman utama.
                 switch ($_SESSION['role_id']) {
                     case 1:
-                        header("Location: /proyek-ifws/pages/User/homepage_user.php");
+                        header("Location: /proyek-ifws/pages/User/homepage_peserta.php");
                         break;
                     case 2:
                         header("Location: /proyek-ifws/pages/PIC/homepage_pic.php");
