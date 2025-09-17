@@ -1,0 +1,127 @@
+-- Menonaktifkan pemeriksaan kunci asing sementara untuk menghindari error saat membuat tabel
+SET FOREIGN_KEY_CHECKS=0;
+
+--
+-- Struktur Tabel untuk `jenis_ifws`
+--
+DROP TABLE IF EXISTS `jenis_ifws`;
+CREATE TABLE `jenis_ifws` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nama_jenis` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Data Dummy untuk Tabel `jenis_ifws`
+--
+INSERT INTO `jenis_ifws` (`id`, `nama_jenis`) VALUES
+(1, 'Umum'),
+(2, 'Internal - Jurusan'),
+(3, 'Internal - Dosen'),
+(4, 'Internasional');
+
+--
+-- Struktur Tabel untuk `ifws`
+--
+DROP TABLE IF EXISTS `ifws`;
+CREATE TABLE `ifws` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `topik_webinar` text DEFAULT NULL,
+  `id_jenis_ifws` int(11) DEFAULT NULL,
+  `tahun_akd` varchar(9) DEFAULT NULL,
+  `semester_akd` enum('Ganjil','Genap') DEFAULT NULL,
+  `tanggal` date NOT NULL,
+  `link_webinar` varchar(255) DEFAULT NULL,
+  `jam_mulai` time DEFAULT NULL,
+  `jam_selesai` time DEFAULT NULL,
+  `sertifikat_peserta` varchar(255) DEFAULT NULL,
+  `sertifikat_narasumber` varchar(255) DEFAULT NULL,
+  `poster` varchar(255) DEFAULT NULL,
+  `status_rekap` enum('tersedia','tidak_tersedia') DEFAULT 'tidak_tersedia',
+  PRIMARY KEY (`id`),
+  KEY `fk_ifws_jenis` (`id_jenis_ifws`),
+  CONSTRAINT `fk_ifws_jenis` FOREIGN KEY (`id_jenis_ifws`) REFERENCES `jenis_ifws` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Data Dummy untuk Tabel `ifws`
+--
+INSERT INTO `ifws` (`id`, `topik_webinar`, `id_jenis_ifws`, `tahun_akd`, `semester_akd`, `tanggal`, `link_webinar`, `jam_mulai`, `jam_selesai`, `sertifikat_peserta`, `sertifikat_narasumber`, `poster`, `status_rekap`) VALUES
+(1, 'Introduction To 3D Computer Vision', 2, '2023/2024', 'Ganjil', '2023-01-01', 'ifws.co/ifws', '13:00:00', '14:00:00', 'template1.png', 'template1.png', 'poster.png', 'tersedia'),
+(2, 'Automation in Tech Industry', 3, '2023/2024', 'Ganjil', '2023-02-01', 'ifws.co/ifws', '13:00:00', '14:00:00', 'template2.png', 'template2.png', 'poster.png', 'tersedia'),
+(3, 'Real-World Examples of Cloud Reliability', 1, '2023/2024', 'Genap', '2023-03-01', 'ifws.co/ifws', '13:00:00', '14:00:00', 'template3.png', 'template3.png', 'poster.png', 'tidak_tersedia'),
+(4, 'Dunia ERP dan Odoo', 1, '2023/2024', 'Genap', '2023-04-01', 'ifws.co/ifws', '13:00:00', '14:00:00', 'template4.png', 'template4.png', 'poster.png', 'tersedia'),
+(5, 'The Future of Quantum Computing and Its Impact', 4, '2023/2024', 'Genap', '2025-10-11', 'ifws.co/ifws', '13:00:00', '14:00:00', 'template4.png', 'template4.png', 'poster.png', 'tidak_tersedia');
+
+--
+-- Struktur Tabel untuk `role`
+--
+DROP TABLE IF EXISTS `role`;
+CREATE TABLE `role` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `namaRole` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `namaRole` (`namaRole`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Data Dummy untuk Tabel `role`
+--
+INSERT INTO `role` (`id`, `namaRole`) VALUES
+(1, 'User'),
+(2, 'PIC'),
+(3, 'Sekretariat'),
+(4, 'Bendahara'),
+(5, 'Teknisi'),
+(6, 'Promosi');
+
+--
+-- Struktur Tabel untuk `users`
+--
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `nama` varchar(255) DEFAULT NULL,
+  `role_id` int(11) NOT NULL DEFAULT 1 REFERENCES `role`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+--
+-- Data Dummy untuk Tabel `users`
+-- (Password untuk pengguna ini adalah 'test123')
+--
+INSERT INTO `users` (`email`, `password`, `nama`, `role_id`) VALUES
+('user@unpar.ac.id', 'test123', 'Benny', 1),
+('pic@unpar.ac.id', 'test123', 'Bu Mar', 2),
+('sekretariat@unpar.ac.id', 'test123', 'Bu Van', 3),
+('bendahara@unpar.ac.id', 'test123', 'Pa Hus', 4),
+('teknisi@unpar.ac.id', 'test123', 'Pa Ke', 5),
+('promosi@unpar.ac.id', 'test123', 'Ci Mar', 6),
+('user@gmail.com', 'test123', 'Rafli', 1);
+
+--
+-- Struktur Tabel untuk `peraturan`
+--
+DROP TABLE IF EXISTS `peraturan`;
+CREATE TABLE `peraturan` (
+  `tahun_akd` varchar(9) NOT NULL,
+  `semester_akd` enum('Ganjil','Genap') NOT NULL,
+  `peraturan_waktu` int(11) DEFAULT NULL,
+  `peraturan_sidang` int(11) DEFAULT NULL,
+  UNIQUE KEY `idx_akademik_unik` (`tahun_akd`, `semester_akd`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Data Dummy untuk Tabel `peraturan`
+--
+INSERT INTO `peraturan` 
+(`tahun_akd`, `semester_akd`, `peraturan_waktu`, `peraturan_sidang`) 
+VALUES
+('2023/2024', 'Ganjil', 45, 5);
+
+-- Mengaktifkan kembali pemeriksaan kunci asing
+SET FOREIGN_KEY_CHECKS=1;

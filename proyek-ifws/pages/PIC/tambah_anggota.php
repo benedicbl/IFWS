@@ -1,0 +1,47 @@
+<?php include '../../includes/auth_check.php'; ?>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Tambah Anggota</title>
+    <link rel="stylesheet" href="/proyek-ifws/assets/css/PIC/form_anggota_style.css">
+</head>
+<body>
+    <div class="app-layout">
+        
+        <?php include '../../includes/sidebar.php'; ?>
+
+        <main class="main-content">
+            <h1>Tambah Data Anggota</h1>
+            <div class="form-container">
+                <form id="form-anggota">
+                    <div class="form-group">
+                        <label for="nama">Nama Anggota</label>
+                        <input type="text" id="nama" name="nama" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="jabatan">Jabatan</label>
+                        <select id="jabatan" name="jabatan" required>
+                            <option value="" disabled selected>Pilih Jabatan</option>
+                            <option value="PIC">PIC</option>
+                            <option value="Sekretariat">Sekretariat</option>
+                            <option value="Bendahara">Bendahara</option>
+                            <option value="Promosi">Promosi</option>
+                            <option value="Teknisi">Teknisi</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <a href="list_anggota.php" class="btn btn-kembali">Kembali</a>
+                        <button type="submit" class="btn btn-simpan">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+    <script src="/proyek-ifws/assets/js/PIC/tambah_anggota_script.js"></script>
+</body>
+</html>
