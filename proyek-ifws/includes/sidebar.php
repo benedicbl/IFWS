@@ -56,15 +56,15 @@
         // Menu untuk page sekretariat
         elseif ($role_id == 3) :
         ?>
-            <!-- <li class="<?php echo ($current_page == 'list_ifws_teknisi.php') ? 'active' : ''; ?>">
-                <a href="/proyek-ifws/pages/Teknisi/list_ifws_teknisi.php" title="List IFWS"><i class="fa-solid fa-list-ul fa-lg"></i></a>
+            <li class="<?php echo ($current_page == 'list_ifws_sekretariat.php') ? 'active' : ''; ?>">
+                <a href="/proyek-ifws/pages/Sekretariat/list_ifws_sekretariat.php" title="List IFWS"><i class="fa-solid fa-list-ul fa-lg"></i></a>
             </li>
-            <li class="<?php echo ($current_page == 'pengaturan_kehadiran.php') ? 'active' : ''; ?>">
-                <a href="/proyek-ifws/pages/Teknisi/pengaturan_kehadiran.php" title="Pengaturan Kehadiran"><i class="fa-solid fa-user-clock fa-lg"></i></a>
+            <li class="<?php echo ($current_page == 'peserta_ta.php') ? 'active' : ''; ?>">
+                <a href="/proyek-ifws/pages/Sekretariat/peserta_ta.php" title="Pengaturan Kehadiran"><i class="fa-solid fa-user-clock fa-lg"></i></a>
             </li>
-            <li class="<?php echo ($current_page == 'pengaturan_sidang.php') ? 'active' : ''; ?>">
-                <a href="/proyek-ifws/pages/Teknisi/pengaturan_sidang.php" title="Pengaturan Sidang"><i class="fa-solid fa-user-graduate fa-lg"></i></a>
-            </li> -->
+            <li class="<?php echo ($current_page == 'sertifikat.php') ? 'active' : ''; ?>">
+                <a href="/proyek-ifws/pages/Sekretariat/sertifikat.php" title="Pengaturan Sidang"><i class="fa-solid fa-user-graduate fa-lg"></i></a>
+            </li>
             <?php
         // Menu untuk page bendahara
         elseif ($role_id == 4) :
