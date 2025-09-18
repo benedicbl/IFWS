@@ -61,10 +61,12 @@
                 <a href="/proyek-ifws/pages/Sekretariat/list_ifws_sekretariat.php" title="List IFWS"><i class="fa-solid fa-list-ul fa-lg"></i></a>
             </li>
             <li class="<?php echo ($current_page == 'peserta_ta.php') ? 'active' : ''; ?>">
+
                 <a href="/proyek-ifws/pages/Sekretariat/peserta_ta.php" title="Pengaturan Kehadiran"><i class="fa-solid fa-chalkboard-user"></i></a>
             </li>
             <li class="<?php echo ($current_page == 'sertifikat.php') ? 'active' : ''; ?>">
                 <a href="/proyek-ifws/pages/Sekretariat/sertifikat.php" title="Pengaturan Sidang"><i class="fa-solid fa-award"></i></a>
+
             </li>
             <?php
         // Menu untuk page bendahara
@@ -101,6 +103,7 @@
             </li>
             <li class="<?php echo ($current_page == 'riwayat_peserta.php') ? 'active' : ''; ?>">
                     <a href="/proyek-ifws/pages/User/riwayat_peserta.php" title="Riwayat IFWS"><i class="fa-solid fa-chalkboard-user"></i></a>
+                    <a href="/proyek-ifws/pages/User/riwayat_peserta.php" title="Riwayat IFWS"><i class="fa-solid fa-user-circle fa-lg"></i></a>
             </li>
         <?php
         endif;

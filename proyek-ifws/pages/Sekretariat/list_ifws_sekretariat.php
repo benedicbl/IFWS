@@ -50,8 +50,7 @@
                 </div>
             </div>
         </main>
-    </div>
-
+    </div>  
     <script src="/proyek-ifws/assets/js/Sekretariat/list_ifws_sekretariat_script.js"></script>
 </body>
 </html>
