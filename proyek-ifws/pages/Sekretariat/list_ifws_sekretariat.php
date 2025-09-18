@@ -19,17 +19,17 @@
             <header class="main-header">
                 <h1>List IFWS</h1>
                 <div class="dropdown">
-                    <button id="pilihTahunBtn" class="dropdown-btn">Pilih Tahun <i class="fa-solid fa-chevron-down"></i></button>
+                    <button id="pilihTahunBtn" class="dropdown-btn">Pilih Tahun Akademik<i class="fa-solid fa-chevron-down"></i></button>
                     <div id="tahunDropdown" class="dropdown-content">
-                        <a href="#" data-tahun="2025-Ganjil">2025-Ganjil</a>
-                        <a href="#" data-tahun="2024-Genap">2024-Genap</a>
-                    </div>
+                        </div>
                 </div>
             </header>
+            
             <div id="initial-message" class="initial-message">
                 <p>Silakan pilih tahun akademik terlebih dahulu.</p>
             </div>
-            <div id="webinar-section" class="hidden">
+
+            <div id="webinar-section" class="webinar-section hidden">
                 <div class="webinar-header">
                     <h2 id="tahunAkademikTitle"></h2>
                 </div>
@@ -41,15 +41,17 @@
                                 <th>Tanggal</th>
                                 <th>Jenis IFWS</th>
                                 <th>Topik Webinar</th>
-                                <th></th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
-                        <tbody id="webinar-table-body"></tbody>
+                        <tbody id="webinar-table-body">
+                            </tbody>
                     </table>
                 </div>
             </div>
         </main>
     </div>
+
     <script src="/proyek-ifws/assets/js/Sekretariat/list_ifws_sekretariat_script.js"></script>
-    </body>
+</body>
 </html>

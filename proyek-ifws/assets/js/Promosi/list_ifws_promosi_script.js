@@ -1,18 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Data semu dengan properti 'posterFile'
-    const webinarData = {
-        '2025-Ganjil': [
-            { id: 101, topik: 'Introduction To 3D Computer Vision', tanggal: '10/08/2025', posterFile: 'poster_3d_vision.jpg' },
-            { id: 102, topik: 'Automation in Tech Industry', tanggal: '12/08/2025', posterFile: null },
-        ],
-        '2024-Genap': [
-            { id: 201, topik: 'Masa Depan Antariksa', tanggal: '20/04/2024', posterFile: null },
-        ]
-    };
+    let currentEditingId = null;
+    let selectedYearData = null;
+    let webinars = [];
 
-    let currentEditingId = null; 
-    let selectedYear = null;
-    
     // --- DOM Elements ---
     const pilihTahunBtn = document.getElementById('pilihTahunBtn');
     const tahunDropdown = document.getElementById('tahunDropdown');
@@ -20,14 +10,88 @@ document.addEventListener('DOMContentLoaded', () => {
     const initialMessage = document.getElementById('initial-message');
     const dataSection = document.getElementById('data-section');
     
-    // --- Modal Elements ---
     const modal = document.getElementById('poster-modal');
     const modalTitle = document.getElementById('modal-webinar-title');
     const modalFileInput = document.getElementById('poster-file-input');
     const cancelModalBtn = document.getElementById('cancel-modal-btn');
     const savePosterBtn = document.getElementById('save-poster-btn');
 
-    // --- LOGIKA DROPDOWN (YANG HILANG SEBELUMNYA) ---
+    // --- Image Viewer Modal Elements ---
+    const imageViewerModal = document.getElementById('image-viewer-modal');
+    const fullPosterImage = document.getElementById('full-poster-image');
+    const closeModalBtn = document.querySelector('.close-modal-btn');
+
+
+    // --- FUNGSI ---
+
+    const populateTahunDropdown = (tahunList) => {
+        tahunDropdown.innerHTML = '';
+        if (tahunList && tahunList.length > 0) {
+            tahunList.forEach(item => {
+                const link = document.createElement('a');
+                link.href = '#';
+                link.dataset.tahun = `${item.tahun_akd}-${item.semester_akd}`;
+                link.textContent = `${item.tahun_akd} - ${item.semester_akd}`;
+                tahunDropdown.appendChild(link);
+            });
+        } else {
+            tahunDropdown.innerHTML = '<a>Tidak ada data.</a>';
+        }
+    };
+
+    const displayWebinars = () => {
+        tableBody.innerHTML = '';
+        if (webinars && webinars.length > 0) {
+            webinars.forEach(webinar => {
+                const row = document.createElement('tr');
+                row.setAttribute('data-id', webinar.id);
+                // Menampilkan nama file poster jika ada
+                let posterStatus = `<span class="poster-status belum-ada">Belum Ada</span>`;
+                if (webinar.poster) {
+                    // Tambahkan class 'viewable' untuk menandai gambar bisa diklik
+                    posterStatus = `<img src="data:image/jpeg;base64,${webinar.poster}" alt="Poster" class="poster-thumbnail viewable" title="Klik untuk lihat ukuran penuh">`;
+                }
+                const formattedDate = new Date(webinar.tanggal).toLocaleDateString('id-ID', {
+                    day: '2-digit', month: 'long', year: 'numeric'
+                });
+    
+                row.innerHTML = `
+                    <td>${webinar.topik_webinar}</td>
+                    <td>${formattedDate}</td>
+                    <td>${posterStatus}</td>
+                    <td><button class="btn-upload">Upload / Ganti</button></td>
+                `;
+                tableBody.appendChild(row);
+            });
+        } else {
+            tableBody.innerHTML = `<tr><td colspan="4" style="text-align:center;">Tidak ada data webinar.</td></tr>`;
+        }
+        dataSection.classList.remove('hidden');
+        initialMessage.classList.add('hidden');
+    };
+
+    const fetchWebinars = (tahun, semester) => {
+        tableBody.innerHTML = `<tr><td colspan="4" style="text-align:center;">Memuat data...</td></tr>`;
+        fetch(`/proyek-ifws/api/get_ifws_for_promosi.php?tahun=${tahun}&semester=${semester}`)
+            .then(response => response.json())
+            .then(data => {
+                webinars = data;
+                displayWebinars();
+            })
+            .catch(error => console.error('Gagal memuat data webinar:', error));
+    };
+
+    const openModal = (webinar) => {
+        currentEditingId = webinar.id;
+        modalTitle.textContent = webinar.topik_webinar;
+        modalFileInput.value = ''; // Reset input file
+        modal.classList.remove('hidden');
+    };
+    
+    const closeModal = () => modal.classList.add('hidden');
+
+    // --- EVENT LISTENERS ---
+
     pilihTahunBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         tahunDropdown.classList.toggle('show');
@@ -36,109 +100,91 @@ document.addEventListener('DOMContentLoaded', () => {
     tahunDropdown.addEventListener('click', (e) => {
         e.preventDefault();
         const link = e.target.closest('a');
-        if (link) {
-            selectedYear = link.getAttribute('data-tahun');
-            if (selectedYear) {
-                displayWebinars(selectedYear);
-                pilihTahunBtn.innerHTML = `${selectedYear} <i class="fa-solid fa-chevron-down"></i>`;
-                tahunDropdown.classList.remove('show');
-            }
+        if (link && link.dataset.tahun) {
+            const tahunData = link.getAttribute('data-tahun');
+            const [tahun_akd, semester] = tahunData.split('-');
+            selectedYearData = { tahun: tahun_akd, semester: semester };
+            fetchWebinars(tahun_akd, semester);
+            pilihTahunBtn.innerHTML = `${link.textContent} <i class="fa-solid fa-chevron-down"></i>`;
+            tahunDropdown.classList.remove('show');
         }
     });
     
-    // Menutup dropdown jika klik di luar
     window.addEventListener('click', (e) => {
         if (!e.target.closest('.dropdown')) {
-            if (tahunDropdown.classList.contains('show')) {
-                tahunDropdown.classList.remove('show');
-            }
+            tahunDropdown.classList.remove('show');
         }
     });
-    // --- AKHIR DARI LOGIKA DROPDOWN ---
-
-
-    // --- Fungsi Utama untuk Menampilkan Data ---
-    const displayWebinars = (tahun) => {
-        const data = webinarData[tahun] || [];
-        tableBody.innerHTML = '';
-        if (data.length > 0) {
-            data.forEach(webinar => {
-                const row = document.createElement('tr');
-                row.setAttribute('data-id', webinar.id);
-                const posterStatus = webinar.posterFile 
-                    ? `<span class="poster-status sudah-ada">${webinar.posterFile}</span>`
-                    : `<span class="poster-status belum-ada">Belum Ada</span>`;
-    
-                row.innerHTML = `
-                    <td>${webinar.topik}</td>
-                    <td>${webinar.tanggal}</td>
-                    <td>${posterStatus}</td>
-                    <td><button class="btn-upload">Upload</button></td>
-                `;
-                tableBody.appendChild(row);
-            });
-        } else {
-            tableBody.innerHTML = `<tr><td colspan="4" style="text-align:center;">Tidak ada data.</td></tr>`;
-        }
-        dataSection.classList.remove('hidden');
-        initialMessage.classList.add('hidden');
-    };
-
-    // --- Logika Modal ---
-    const openModal = (webinar) => {
-        currentEditingId = webinar.id;
-        modalTitle.textContent = webinar.topik;
-        modalFileInput.value = '';
-        modal.classList.remove('hidden');
-    };
-    const closeModal = () => modal.classList.add('hidden');
 
     tableBody.addEventListener('click', (e) => {
         if (e.target.classList.contains('btn-upload')) {
             const row = e.target.closest('tr');
             const webinarId = parseInt(row.dataset.id);
-            let webinarToEdit;
-            for (const year in webinarData) {
-                const found = webinarData[year].find(w => w.id === webinarId);
-                if (found) { webinarToEdit = found; break; }
-            }
+            const webinarToEdit = webinars.find(w => w.id === webinarId);
             if (webinarToEdit) openModal(webinarToEdit);
+        }
+
+        // LOGIKA BARU: Jika thumbnail gambar diklik
+        if (e.target.classList.contains('viewable')) {
+            fullPosterImage.src = e.target.src; // Set gambar di modal dengan gambar yang diklik
+            imageViewerModal.classList.remove('hidden'); // Tampilkan modal
         }
     });
     
     cancelModalBtn.addEventListener('click', closeModal);
+
+    // LOGIKA BARU: Event listener untuk menutup modal gambar
+    const closeImageViewer = () => imageViewerModal.classList.add('hidden');
+    closeModalBtn.addEventListener('click', closeImageViewer);
+    imageViewerModal.addEventListener('click', (e) => {
+        // Tutup modal jika area gelap di sekeliling gambar diklik
+        if (e.target === imageViewerModal) {
+            closeImageViewer();
+        }
+    });
+    
     savePosterBtn.addEventListener('click', () => {
         const file = modalFileInput.files[0];
         if (!file) {
             alert('Harap pilih file poster terlebih dahulu!');
             return;
         }
+        if (currentEditingId === null) return;
 
-        if (currentEditingId !== null) {
-            let webinarToUpdate;
-            for (const year in webinarData) {
-                const found = webinarData[year].find(w => w.id === currentEditingId);
-                if (found) { webinarToUpdate = found; break; }
-            }
-            if (webinarToUpdate) {
-                webinarToUpdate.posterFile = file.name;
-                alert(`Poster "${file.name}" berhasil diupload!`);
+        // Gunakan FormData untuk mengirim file
+        const formData = new FormData();
+        formData.append('id_webinar', currentEditingId);
+        formData.append('posterFile', file);
+
+        savePosterBtn.textContent = 'Mengupload...';
+        savePosterBtn.disabled = true;
+
+        fetch('/proyek-ifws/api/upload_poster.php', {
+            method: 'POST',
+            body: formData // Kirim sebagai FormData
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.pesan);
+            if (data.sukses) {
                 closeModal();
-                displayWebinars(selectedYear);
+                // Refresh data tabel
+                fetchWebinars(selectedYearData.tahun, selectedYearData.semester);
             }
-        }
+        })
+        .catch(error => {
+            console.error('Error saat upload:', error);
+            alert('Terjadi kesalahan saat mengupload file.');
+        })
+        .finally(() => {
+            savePosterBtn.textContent = 'Simpan';
+            savePosterBtn.disabled = false;
+        });
     });
     
     // --- Inisialisasi Halaman ---
-    const initializePage = () => {
-        selectedYear = Object.keys(webinarData)[0];
-        if (selectedYear) {
-            displayWebinars(selectedYear);
-            pilihTahunBtn.innerHTML = `${selectedYear} <i class="fa-solid fa-chevron-down"></i>`;
-        } else {
-            initialMessage.classList.remove('hidden');
-            dataSection.classList.add('hidden');
-        }
-    };
-    initializePage();
+    fetch('/proyek-ifws/api/get_tahun_akademik.php')
+        .then(response => response.json())
+        .then(data => populateTahunDropdown(data))
+        .catch(error => console.error('Gagal memuat daftar tahun:', error));
 });

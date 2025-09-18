@@ -1,0 +1,25 @@
+/* === Penyesuaian Tampilan Sidebar === */
+/* Mengatur header dan memberi jarak ke bawah */
+/* .sidebar-header {
+    margin-bottom: 20px; /* Menambah jarak di bawah header (logo). Sesuaikan nilai 20px ini sesuai selera Anda. */
+/* } */
+
+/* Mengatur ukuran logo di header */
+/* .sidebar-logo {
+    width: 60px;
+    height: auto;
+} */
+
+/* Memperbesar ikon di navigasi utama */
+/* .sidebar-nav a i {
+    font-size: 20px; /* Sesuaikan nilainya jika perlu */
+/* }  */
+
+/* Mengatur nama pengguna di footer agar di tengah dan lebih besar */
+.sidebar-footer .user-name {
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}

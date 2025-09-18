@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const fetchWebinars = (tahun, semester) => {
         tableBody.innerHTML = `<tr><td colspan="5" style="text-align:center;">Memuat data...</td></tr>`;
        
-        fetch(`/proyek-ifws/api/get_ifws_list.php?tahun=${tahun}&semester=${semester}`)
+        fetch(`/proyek-ifws/api/get_ifws_for_teknisi.php?tahun=${tahun}&semester=${semester}`)
             .then(response => response.json())
             .then(data => {
                 webinars = data;

@@ -29,6 +29,7 @@
     }
 
 ?>
+    <link rel="stylesheet" href="/proyek-ifws/assets/css/sidebar_style.css">
 <nav class="sidebar">
     <div class="sidebar-header">
         <a href="<?php echo $homepage_url; ?>">
@@ -60,10 +61,10 @@
                 <a href="/proyek-ifws/pages/Sekretariat/list_ifws_sekretariat.php" title="List IFWS"><i class="fa-solid fa-list-ul fa-lg"></i></a>
             </li>
             <li class="<?php echo ($current_page == 'peserta_ta.php') ? 'active' : ''; ?>">
-                <a href="/proyek-ifws/pages/Sekretariat/peserta_ta.php" title="Pengaturan Kehadiran"><i class="fa-solid fa-user-clock fa-lg"></i></a>
+                <a href="/proyek-ifws/pages/Sekretariat/peserta_ta.php" title="Pengaturan Kehadiran"><i class="fa-solid fa-chalkboard-user"></i></a>
             </li>
             <li class="<?php echo ($current_page == 'sertifikat.php') ? 'active' : ''; ?>">
-                <a href="/proyek-ifws/pages/Sekretariat/sertifikat.php" title="Pengaturan Sidang"><i class="fa-solid fa-user-graduate fa-lg"></i></a>
+                <a href="/proyek-ifws/pages/Sekretariat/sertifikat.php" title="Pengaturan Sidang"><i class="fa-solid fa-award"></i></a>
             </li>
             <?php
         // Menu untuk page bendahara
@@ -89,7 +90,7 @@
         elseif ($role_id == 6) :
         ?>
             <li class="<?php echo ($current_page == 'list_ifws_promosi.php') ? 'active' : ''; ?>">
-                    <a href="/proyek-ifws/pages/Promosi/list_ifws_promosi.php" title="List IFWS"><i class="fa-solid fa-list-ul fa-lg"></i></a>
+                    <a href="/proyek-ifws/pages/Promosi/list_ifws_promosi.php" title="Upload Poster"><i class="fa-solid fa-file-image"></i></a>
             </li>
             <?php
         // Menu untuk page user
@@ -99,14 +100,16 @@
                     <a href="/proyek-ifws/pages/User/list_ifws_peserta.php" title="List IFWS"><i class="fa-solid fa-list-ul fa-lg"></i></a>
             </li>
             <li class="<?php echo ($current_page == 'riwayat_peserta.php') ? 'active' : ''; ?>">
-                    <a href="/proyek-ifws/pages/User/riwayat_peserta.php" title="Riwayat IFWS"><i class="fa-solid fa-user-circle fa-lg"></i></a>
+                    <a href="/proyek-ifws/pages/User/riwayat_peserta.php" title="Riwayat IFWS"><i class="fa-solid fa-chalkboard-user"></i></a>
             </li>
         <?php
         endif;
         ?>
     </ul>
     <ul class="sidebar-footer">
-        <li><a href="#" title="Profil"><i class="fa-solid fa-user-circle fa-lg"></i></a></li>
-        <li><a href="#" title="Dokumen"><i class="fa-regular fa-file-lines fa-lg"></i></a></li>
+        <?php 
+            echo '<p class="user-name">' . htmlspecialchars($_SESSION['nama']) . '</p>';
+        ?>
+        <li><a href="/proyek-ifws/login.php" title="Logout"><i class="fa-solid fa-right-from-bracket"></i></a></li>
     </ul>
 </nav>

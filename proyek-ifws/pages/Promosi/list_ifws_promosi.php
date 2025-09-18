@@ -16,10 +16,7 @@
                 <h1>Upload Poster IFWS</h1>
                 <div class="dropdown">
                     <button id="pilihTahunBtn" class="dropdown-btn">Pilih Tahun Akademik <i class="fa-solid fa-chevron-down"></i></button>
-                    <div id="tahunDropdown" class="dropdown-content">
-                        <a href="#" data-tahun="2025-Ganjil">2025-Ganjil</a>
-                        <a href="#" data-tahun="2024-Genap">2024-Genap</a>
-                    </div>
+                    <div id="tahunDropdown" class="dropdown-content"></div>
                 </div>
             </header>
 
@@ -58,6 +55,10 @@
         </div>
     </div>
 
+    <div id="image-viewer-modal" class="modal-overlay hidden">
+        <span class="close-modal-btn">&times;</span>
+        <img class="modal-content-image" id="full-poster-image">
+    </div>
     <script src="/proyek-ifws/assets/js/Promosi/list_ifws_promosi_script.js"></script>
 </body>
 </html>
