@@ -57,10 +57,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         header("Location: /proyek-ifws/pages/Bendahara/homepage_bendahara.php");
                         break;
                     case 5:
-                        header("Location: /proyek-ifws/pages/Teknisi/homepage_teknisi.php");
+                        header("Location: /proyek-ifws/pages/Teknisi/teknisi.php");
                         break;
                     case 6:
-                        header("Location: /proyek-ifws/pages/Promosi/homepage_promosi.php");
+                        header("Location: /proyek-ifws/pages/Promosi/promosi.php");
                         break;
                     }
                 exit;

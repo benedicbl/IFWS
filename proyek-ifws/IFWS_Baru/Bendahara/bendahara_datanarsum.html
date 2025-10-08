@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Admin - List Narasumber</title>
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <div class="logo-and-title">
+            <img
+              src="../assets/picture/logo.png"
+              alt="Logo Informatics"
+              class="sidebar-logo"
+            />
+            <h2>Informatics<br /><span>Webinar Series</span></h2>
+          </div>
+          <div class="admin-profile">
+            <small>Bendahara</small>
+          </div>
+        </div>
+        <nav class="sidebar-nav">
+          <div class="nav-section">
+            <p class="section-title">DASHBOARD</p>
+            <ul>
+              <li>
+                <a href="bendahara.html">
+                  <i class="fas fa-tachometer-alt"></i>
+                  <span>Dashboard</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="nav-section">
+            <p class="section-title">KELOLA DATA IFWS</p>
+            <ul>
+              <li class="active">
+                <a href="bendahara_datanarsum.html">
+                  <i class="fas fa-user-friends"></i>
+                  <span>Data Narasumber</span>
+                </a>
+              </li>
+              <li>
+                <a href="bendahara_buktitrf.html">
+                  <i class="fas fa-file-invoice-dollar"></i>
+                  <span>Bukti Insentif</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </aside>
+
+      <main class="main-content">
+        <h1>List Narasumber</h1>
+        <div class="content-card">
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th><input type="checkbox" /></th>
+                  <th>Nama</th>
+                  <th>Alamat Email</th>
+                  <th>Riwayat</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="checkbox" /></td>
+                  <td>JOHN DOE</td>
+                  <td>johndoe@gmail.com</td>
+                  <td><a href="#" class="btn btn-lihat view-history-btn" data-speaker-name="John Doe">Lihat</a></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" /></td>
+                  <td>JOSH EVERMAN</td>
+                  <td>josheverman@gmail.com</td>
+                  <td><a href="#" class="btn btn-lihat view-history-btn" data-speaker-name="Josh Everman">Lihat</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div id="history-overlay" class="overlay hidden">
+        <div class="overlay-content large">
+            <div class="overlay-header">
+                <h3 class="overlay-main-title">Riwayat Narasumber</h3>
+                <button id="close-history-overlay-btn" class="btn-back">&lt; Back</button>
+            </div>
+            <div class="overlay-body">
+                <p class="speaker-name-title">Nama Narasumber : <strong id="speaker-name"></strong></p>
+                <div class="table-container">
+                    <table class="modal-table">
+                        <thead>
+                            <tr>
+                                <th>Tanggal</th>
+                                <th>Kategori IFWS</th>
+                                <th>Topik</th>
+                                <th>Bukti Insentif</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>27/09/2025</td>
+                                <td><span class="badge badge-umum">Umum</span></td>
+                                <td>Sistem Informasi Apotek Adora</td>
+                                <td>
+                                    <a href="#" class="btn btn-icon-only view-poster-btn" data-poster-src="../assets/picture/bukti-insentif-1.jpg">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="poster-overlay" class="overlay hidden">
+      <div class="overlay-content">
+        <div class="overlay-header">
+          <h3 class="overlay-main-title">Preview Bukti Insentif</h3>
+          <button id="close-overlay-btn" class="btn-back">&lt; Back</button>
+        </div>
+        <div class="overlay-body">
+          <img id="poster-preview-img" src="" alt="Preview Bukti Insentif" />
+        </div>
+      </div>
+    </div>
+
+    <script src="../assets/scripts/Bendahara/riwayat_insentif.js"></script>
+  </body>
+</html>
