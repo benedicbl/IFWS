@@ -1,10 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-
     // --- Variabel Global ---
     let webinars = []; // Untuk menampung data webinar dari API
     let selectedYearData = null; // Untuk menyimpan tahun & semester yang dipilih
-
 
     // --- DOM Elements ---
     const pilihTahunBtn = document.getElementById('pilihTahunBtn');
@@ -13,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const webinarSection = document.getElementById('webinar-section');
     const tahunAkademikTitle = document.getElementById('tahunAkademikTitle');
     const webinarTableBody = document.getElementById('webinar-table-body');
-
 
     // --- FUNGSI-FUNGSI ---
 
@@ -43,22 +40,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (webinars && webinars.length > 0) {
             webinars.forEach(webinar => {
-
                 const row = document.createElement('tr');
                 
                 // LOGIKA KONDISIONAL UNTUK TOMBOL
                 let actionButtonHtml = '';
-
                 // Asumsi API mengembalikan properti 'sudah_rekap'
                 if (webinar.sudah_rekap) {
                     actionButtonHtml = `<a href="/proyek-ifws/pages/Sekretariat/lihat_rekap.php?id=${webinar.id}" class="btn-lihat">Lihat</a>`;
                 } else {
-
                     actionButtonHtml = `<a href="/proyek-ifws/pages/Sekretariat/rekap_peserta.php?id=${webinar.id}" class="btn-rekap">Rekap</a>`;
                 }
 
                 row.innerHTML = `
-
                     <td>${webinar.narasumber || 'N/A'}</td>
                     <td>${new Date(webinar.tanggal).toLocaleDateString('id-ID', {day: '2-digit', month: 'long', year: 'numeric'})}</td>
                     <td>${webinar.jenis_webinar || 'N/A'}</td>
@@ -68,14 +61,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 webinarTableBody.appendChild(row);
             });
         } else {
-
              webinarTableBody.innerHTML = `<tr><td colspan="5" style="text-align: center;">Tidak ada data webinar untuk tahun ini.</td></tr>`;
         }
 
         initialMessage.classList.add('hidden');
         webinarSection.classList.remove('hidden');
     }
-  
 
     /**
      * Mengambil data webinar dari API untuk tahun & semester tertentu.
@@ -139,5 +130,4 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Gagal memuat daftar tahun:', error);
             tahunDropdown.innerHTML = '<a>Gagal memuat data.</a>';
         });
-
 });

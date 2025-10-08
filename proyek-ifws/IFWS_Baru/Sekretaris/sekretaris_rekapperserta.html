@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Admin - Rekap Peserta</title>
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <div class="logo-and-title">
+            <img
+              src="../assets/picture/logo.png"
+              alt="Logo Informatics"
+              class="sidebar-logo"
+            />
+            <h2>Informatics<br /><span>Webinar Series</span></h2>
+          </div>
+          <div class="admin-profile">
+            <small>Sekretaris</small>
+          </div>
+        </div>
+        <nav class="sidebar-nav">
+          <div class="nav-section">
+            <p class="section-title">DASHBOARD</p>
+            <ul>
+              <li><a href="sekretaris.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+            </ul>
+          </div>
+          <div class="nav-section">
+            <p class="section-title">KELOLA DATA IFWS</p>
+            <ul>
+              <li class="active"><a href="sekretaris_datawebinar.html"><i class="fas fa-calendar-alt"></i><span>Data Webinar</span></a></li>
+              <li><a href="sekretaris_pesertaTA.html"><i class="fas fa-user-friends"></i><span>Peserta Tugas Akhir</span></a></li>
+              <li><a href="sekretaris_kelolasertif.html"><i class="fas fa-award"></i><span>Kelola Sertifikat</span></a></li>
+            </ul>
+          </div>
+        </nav>
+      </aside>
+
+      <main class="main-content">
+        <div class="page-header">
+          <h1>Rekap Peserta Webinar</h1>
+          <a href="#" class="btn btn-secondary"><i class="fas fa-upload"></i> Import CSV</a>
+        </div>
+
+        <div class="recap-info-header">
+          <p><strong>Narasumber :</strong> Joss Everman</p>
+          <p><strong>Topik IFWS :</strong> Automation in Tech Industry</p>
+        </div>
+
+        <div class="content-card with-custom-header">
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Nama Peserta</th>
+                  <th>Email</th>
+                  <th>Total Duration</th>
+                  <th>Kehadiran</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Nama Contoh Peserta 1</td>
+                  <td>peserta1@email.com</td>
+                  <td>60 menit</td>
+                  <td><span class="status-badge status-valid">Valid</span></td>
+                </tr>
+                <tr>
+                  <td>Nama Contoh Peserta 2</td>
+                  <td>peserta2@email.com</td>
+                  <td>30 menit</td>
+                  <td><span class="status-badge status-invalid">Tidak Valid</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+        <div class="page-actions">
+            <a href="#" class="btn btn-primary">Simpan</a>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
