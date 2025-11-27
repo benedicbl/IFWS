@@ -1,0 +1,41 @@
+/* Gaya untuk halaman Data Narasumber (Bendahara) */
+.btn-lihat {
+  background-color: #e0e7ff;
+  color: #4338ca;
+}
+
+.btn-icon-only {
+  background-color: transparent;
+  border: none;
+  color: #6b7280;
+  font-size: 1.1rem;
+}
+
+.overlay-body img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* ================================== */
+/* FIX 3: PENYESUAIAN GAYA OVERLAY    */
+/* ================================== */
+.overlay-content.large {
+  max-width: 800px;
+}
+
+.speaker-name-title {
+  font-size: 1.1rem;
+  color: #4b5563;
+  margin-bottom: 20px;
+}
+
+.speaker-name-title strong {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.modal-table th,
+.modal-table td {
+  padding: 12px 15px;
+}
+/* Akhir FIX 3 */

@@ -1,0 +1,102 @@
+/* =================================================================
+   FILE: admin_datanarsum.css
+   DESKRIPSI: Styles khusus untuk halaman Data Narasumber
+   ================================================================= */
+
+/* Gaya Overlay (Pop-up/Modal) */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.overlay-content {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  width: 90%;
+  max-width: 800px;
+}
+
+.overlay-content.large {
+  max-width: 1000px; /* Lebar khusus untuk tabel riwayat */
+}
+
+.overlay-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.overlay-main-title {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.btn-back {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #666;
+}
+
+.btn-back:hover {
+  color: #000;
+}
+
+/* Gaya spesifik untuk modal riwayat */
+.speaker-name-title {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.modal-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.modal-table th, .modal-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.modal-table thead th {
+  background-color: #f2f2f2;
+}
+
+.btn-lihat {
+  background-color: #17a2b8;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+/* ... (Kode CSS yang sudah ada) ... */
+
+/* Gaya untuk pesan error di form */
+.form-error {
+    color: #dc2626; /* Merah */
+    background-color: #fee2e2; /* Merah muda */
+    border: 1px solid #fca5a5; /* Merah lebih terang */
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+.form-error.hidden {
+    display: none;
+}
