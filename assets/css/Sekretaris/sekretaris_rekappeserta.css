@@ -1,0 +1,52 @@
+.btn.btn-secondary {
+  background-color: #ffffff;
+  color: #4b5563;
+  border: 1px solid #d1d5db;
+}
+.btn.btn-secondary:hover {
+  background-color: #f9fafb;
+}
+.btn.btn-secondary .fas {
+  margin-right: 6px;
+}
+.recap-info-header {
+  background-color: #6366f1;
+  color: #ffffff;
+  padding: 20px 25px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+.recap-info-header p {
+  margin: 5px 0;
+  font-size: 1rem;
+}
+.recap-info-header p strong {
+  font-weight: 600;
+}
+.status-badge {
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #ffffff;
+  display: inline-block;
+}
+.status-badge.status-valid {
+  background-color: #22c55e;
+}
+.status-badge.status-invalid {
+  background-color: #ef4444;
+}
+.page-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  gap: 10px;
+}
+.btn.btn-primary {
+  background-color: #6366f1;
+  color: #ffffff;
+}
+.btn.btn-primary:hover {
+  background-color: #4f46e5;
+}

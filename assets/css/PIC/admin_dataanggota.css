@@ -1,0 +1,33 @@
+.password-cell {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.btn-toggle-password {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #6b7280;
+    font-size: 1rem;
+    padding: 0.25rem;
+}
+
+        /* Tambahan Style untuk tombol Delete (jika belum ada di CSS) */
+        .btn-danger {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+        /* Agar tombol Edit dan Delete sejajar rapi */
+        td .btn {
+            margin-right: 5px; 
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }

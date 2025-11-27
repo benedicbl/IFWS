@@ -1,0 +1,175 @@
+/* Gaya unik untuk halaman List IFWS */
+.page-section {
+  margin-bottom: 40px;
+}
+.page-section h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.btn-icon-only.info-tooltip-trigger {
+  background-color: #f3f4f6;
+  color: #6b7280;
+}
+.btn-icon-only.info-tooltip-trigger:hover {
+  background-color: #e5e7eb;
+}
+
+/* Tooltip/Popover Box */
+.tooltip-box {
+  position: absolute;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1), 0 5px 10px rgba(0, 0, 0, 0.04);
+  padding: 15px;
+  min-width: 280px; /* Lebar minimum untuk tooltip */
+  z-index: 100;
+  border: 1px solid #e5e7eb;
+}
+.tooltip-box.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transform: scale(0.95);
+}
+.tooltip-title {
+  font-weight: 600;
+  color: #374151;
+  margin: 0 0 10px 0;
+  font-size: 0.9rem;
+}
+.tooltip-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.9rem;
+}
+.tooltip-list li {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+}
+.tooltip-list li:not(:last-child) {
+  border-bottom: 1px solid #f3f4f6;
+}
+.tooltip-list li .fas {
+  margin-right: 10px;
+  width: 16px;
+}
+.tooltip-list li span {
+  font-weight: 500;
+}
+.icon-success {
+  color: #22c55e;
+}
+.icon-warning {
+  color: #f59e0b;
+}
+
+/* Lebarkan overlay form 'Tambah Rencana Webinar' */
+#tambah-overlay .overlay-content {
+    min-width: 500px;
+}
+
+/* Form input jam bersebelahan */
+.form-group-row {
+    display: flex;
+    gap: 1rem;
+}
+.form-group-row .form-group {
+    flex: 1;
+}
+
+/* GAYA UNTUK CUSTOM MULTI-SELECT DROPDOWN */
+.multi-select-container {
+    position: relative;
+    user-select: none;
+}
+.select-box {
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.select-box::after {
+    content: '\25BC';
+    font-size: 0.8em;
+    color: #6b7280;
+}
+.select-box-text {
+    color: #6b7280; /* Warna placeholder */
+}
+.select-box-text.selected {
+    color: #1f2937;
+    font-weight: 500;
+    max-width: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.checkboxes-container {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    border: 1px solid #d1d5db;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    background-color: #fff;
+    z-index: 100;
+    max-height: 180px;
+    overflow-y: auto;
+}
+
+/* === PERBAIKAN DI SINI === */
+.checkboxes-container label {
+    display: flex;
+    align-items: center;
+    padding: 0.3rem 0.75rem; /* DIUBAH: Padding vertikal dipersempit */
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.checkboxes-container label:hover {
+    background-color: #f3f4f6;
+}
+.checkboxes-container label input[type="checkbox"] {
+    margin-right: 0.75rem;
+}
+/* === AKHIR PERBAIKAN === */
+
+
+/* Gaya untuk preview link dan poster di tooltip */
+#view-poster-btn, #view-link-btn {
+    margin-left: auto;
+    padding-left: 10px;
+}
+#poster-check, #link-check {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+#link-preview-text {
+    background-color: #f3f4f6;
+    border: 1px solid #d1d5db;
+    color: #374151;
+    cursor: text;
+    width: 100%;
+    box-sizing: border-box;
+}
+#poster-status,
+#link-status {
+    margin-left: 1rem;
+}
+.overlay-content.small {
+    max-width: 450px;
+}
+.confirm-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+}
