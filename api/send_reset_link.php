@@ -35,8 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $mail->isSMTP();
             $mail->Host       = 'smtp.gmail.com';
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'lesmanabenny89@gmail.com'; // <--- GANTI INI
-            $mail->Password   = 'ayau tmjr ddaa adok';    // <--- GANTI INI
+            $mail->Username   = 'XXX@gmail.com'; // <--- GANTI INI
+            $mail->Password   = 'XXX XXX';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port       = 587;
 
@@ -69,4 +69,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 }
+
 ?>
