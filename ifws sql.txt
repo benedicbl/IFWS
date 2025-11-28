@@ -284,4 +284,8 @@ CREATE TABLE `bukti_insentif` (
 -- Hapus /templates/template_sertifikat_narasumber.php
 
 ALTER TABLE `peserta`
+
+ALTER TABLE `peserta`
+ADD COLUMN `reset_token` VARCHAR(255) NULL,
+ADD COLUMN `reset_expires` DATETIME NULL;
 ADD COLUMN `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
