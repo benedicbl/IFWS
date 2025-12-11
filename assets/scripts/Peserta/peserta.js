@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const overlayKategori = document.getElementById('detail-kategori');
     const overlayTanggal = document.getElementById('detail-tanggal');
     const overlayWaktu = document.getElementById('detail-waktu');
-    const overlayDeskripsi = document.getElementById('detail-deskripsi');
 
     // PERUBAHAN: Event listener sekarang ada di tombol, bukan di kartu
     document.querySelectorAll('.btn-open-detail').forEach(button => {
@@ -28,7 +27,6 @@ document.addEventListener('DOMContentLoaded', function() {
             overlayKategori.textContent = data.kategori || '-';
             overlayTanggal.textContent = data.tanggal || '-';
             overlayWaktu.textContent = data.waktu || '-';
-            overlayDeskripsi.textContent = data.deskripsi || 'Tidak ada deskripsi.';
             
             if (data.poster) {
                 overlayPoster.src = '/projek-ifws/' + data.poster;
