@@ -5,9 +5,9 @@ $nama_peserta = htmlspecialchars($_SESSION['peserta_nama']);
 $email_peserta = htmlspecialchars($_SESSION['peserta_email']);
 
 $base_query = "SELECT w.*, GROUP_CONCAT(DISTINCT n.nama SEPARATOR ', ') AS daftar_narasumber 
-               FROM webinars w 
-               LEFT JOIN webinar_narasumber wn ON w.id = wn.id_webinar 
-               LEFT JOIN narasumber n ON wn.id_narasumber = n.id";
+                FROM webinars w 
+                LEFT JOIN webinar_narasumber wn ON w.id = wn.id_webinar 
+                LEFT JOIN narasumber n ON wn.id_narasumber = n.id";
 
 $query_upcoming = $base_query . " WHERE w.status = 'published' GROUP BY w.id ORDER BY w.tanggal_direncanakan ASC";
 $result_upcoming = mysqli_query($koneksi, $query_upcoming);
@@ -15,7 +15,6 @@ $result_upcoming = mysqli_query($koneksi, $query_upcoming);
 $query_finished = $base_query . " WHERE w.status = 'finished' GROUP BY w.id ORDER BY w.tanggal_direncanakan DESC";
 $result_finished = mysqli_query($koneksi, $query_finished);
 
-$deskripsi_dummy = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,8 +51,8 @@ $deskripsi_dummy = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                              data-kategori="<?= htmlspecialchars($webinar['kategori']) ?>"
                              data-tanggal="<?= date('d F Y', strtotime($webinar['tanggal_direncanakan'])) ?>"
                              data-waktu="<?= date('H:i', strtotime($webinar['jam_mulai'])) ?> - <?= date('H:i', strtotime($webinar['jam_selesai'])) ?> WIB"
-                             data-poster="<?= htmlspecialchars($webinar['poster_path']) ?>"
-                             data-deskripsi="<?= htmlspecialchars($deskripsi_dummy) ?>">
+                             data-poster="<?= htmlspecialchars($webinar['poster_path']) ?>">
+                            
                             <img src="/projek-ifws/<?= htmlspecialchars($webinar['poster_path'] ?? 'assets/picture/default_poster.png') ?>" alt="Poster" class="webinar-card-poster">
 <div class="webinar-card-content">
     <h3><?= htmlspecialchars($webinar['topik']) ?></h3>
@@ -90,8 +89,7 @@ $deskripsi_dummy = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                              data-kategori="<?= htmlspecialchars($webinar['kategori']) ?>"
                              data-tanggal="<?= date('d F Y', strtotime($webinar['tanggal_direncanakan'])) ?>"
                              data-waktu="<?= date('H:i', strtotime($webinar['jam_mulai'])) ?> - <?= date('H:i', strtotime($webinar['jam_selesai'])) ?> WIB"
-                             data-poster="<?= htmlspecialchars($webinar['poster_path']) ?>"
-                             data-deskripsi="<?= htmlspecialchars($deskripsi_dummy) ?>">
+                             data-poster="<?= htmlspecialchars($webinar['poster_path']) ?>">
                             <img src="/projek-ifws/<?= htmlspecialchars($webinar['poster_path'] ?? 'assets/picture/default_poster.png') ?>" alt="Poster" class="webinar-card-poster">
                             <div class="webinar-card-content">
                                 <h3><?= htmlspecialchars($webinar['topik']) ?></h3>
@@ -109,7 +107,32 @@ $deskripsi_dummy = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
         </main>
     </div>
 
-    <div id="webinar-detail-overlay" class="overlay hidden webinar-detail-overlay"><div class="overlay-content"><div class="overlay-header"><h3 class="overlay-main-title">Detail Webinar</h3><button class="btn-close btn-close-overlay">&times;</button></div><div class="overlay-body"><div class="detail-content-left"><img id="detail-poster" src="" alt="Poster Webinar"></div><div class="detail-content-right"><h2 id="detail-title"></h2><div class="detail-info"><div class="detail-info-item"><strong>Narasumber :</strong><span id="detail-narasumber"></span></div><div class="detail-info-item"><strong>Kategori :</strong><span id="detail-kategori"></span></div><div class="detail-info-item"><strong>Tanggal :</strong><span id="detail-tanggal"></span></div><div class="detail-info-item"><strong>Jam :</strong><span id="detail-waktu"></span></div></div><strong>Deskripsi :</strong><p id="detail-deskripsi"></p><div class="detail-actions"><a href="https://tiny.cc/ifws" class="btn btn-success"> Daftar</a></div></div></div></div></div>
+    <div id="webinar-detail-overlay" class="overlay hidden webinar-detail-overlay">
+        <div class="overlay-content">
+            <div class="overlay-header">
+                <h3 class="overlay-main-title">Detail Webinar</h3>
+                <button class="btn-close btn-close-overlay">&times;</button>
+            </div>
+            <div class="overlay-body">
+                <div class="detail-content-left">
+                    <img id="detail-poster" src="" alt="Poster Webinar">
+                </div>
+                <div class="detail-content-right">
+                    <h2 id="detail-title"></h2>
+                    <div class="detail-info">
+                        <div class="detail-info-item"><strong>Narasumber :</strong><span id="detail-narasumber"></span></div>
+                        <div class="detail-info-item"><strong>Kategori :</strong><span id="detail-kategori"></span></div>
+                        <div class="detail-info-item"><strong>Tanggal :</strong><span id="detail-tanggal"></span></div>
+                        <div class="detail-info-item"><strong>Jam :</strong><span id="detail-waktu"></span></div>
+                    </div>
+                    <div class="detail-actions">
+                        <a href="https://tiny.cc/ifws" class="btn btn-success"> Daftar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <script src="/projek-ifws/assets/scripts/Peserta/peserta.js"></script>
 </body>
 </html>
