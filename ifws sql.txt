@@ -1,0 +1,291 @@
+-- Menonaktifkan pengecekan foreign key agar proses drop & create berjalan lancar
+SET FOREIGN_KEY_CHECKS=0;
+
+--
+-- Hapus tabel-tabel lama (jika ada) dalam urutan yang benar (dari anak ke induk)
+--
+DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `webinar_narasumber`;
+DROP TABLE IF EXISTS `foto_pelaksanaan`;
+DROP TABLE IF EXISTS `bukti_insentif`;
+DROP TABLE IF EXISTS `kehadiran`;
+DROP TABLE IF EXISTS `anggota_ifws`;
+DROP TABLE IF EXISTS `webinars`;
+DROP TABLE IF EXISTS `narasumber`;
+DROP TABLE IF EXISTS `peserta`;
+DROP TABLE IF EXISTS `settings`;
+
+--
+-- Struktur tabel untuk `anggota_ifws` (Tabel Induk untuk Staf/Admin)
+--
+CREATE TABLE `anggota_ifws` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nama_lengkap` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `role` enum('admin','sekretaris','bendahara','teknisi','promosi') NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Struktur tabel untuk `narasumber` (Tabel Induk)
+--
+CREATE TABLE `narasumber` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nama` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Struktur tabel untuk `peserta` (Tabel Induk untuk Peserta)
+--
+CREATE TABLE `peserta` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nama_lengkap` varchar(255) NOT NULL,
+  `npm` varchar(20) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `status_ta` enum('Bukan_TA','TA_1','TA_2') NOT NULL DEFAULT 'Bukan_TA',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`),
+  UNIQUE KEY `npm` (`npm`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Struktur tabel untuk `settings`
+--
+CREATE TABLE `settings` (
+  `setting_key` varchar(50) NOT NULL,
+  `setting_value` varchar(255) NOT NULL,
+  PRIMARY KEY (`setting_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Struktur tabel untuk `webinars` (Tabel Induk Utama)
+--
+CREATE TABLE `webinars` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tanggal_direncanakan` date DEFAULT NULL,
+  `jam_mulai` time DEFAULT NULL,
+  `jam_selesai` time DEFAULT NULL,
+  `kategori` varchar(50) DEFAULT NULL,
+  `topik` text DEFAULT NULL,
+  `status` enum('rencana','published','finished') DEFAULT 'rencana',
+  `link_akses` text DEFAULT NULL,
+  `poster_path` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Struktur tabel untuk `bukti_insentif` (Anak dari webinars)
+--
+CREATE TABLE `bukti_insentif` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_webinar` int(11) NOT NULL,
+  `file_path` varchar(255) NOT NULL,
+  `tanggal_upload` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `id_webinar` (`id_webinar`),
+  CONSTRAINT `bukti_insentif_ibfk_1` FOREIGN KEY (`id_webinar`) REFERENCES `webinars` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Struktur tabel untuk `foto_pelaksanaan` (Anak dari webinars)
+--
+CREATE TABLE `foto_pelaksanaan` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_webinar` int(11) NOT NULL,
+  `file_path` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_webinar` (`id_webinar`),
+  CONSTRAINT `foto_pelaksanaan_ibfk_1` FOREIGN KEY (`id_webinar`) REFERENCES `webinars` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Struktur tabel untuk `kehadiran` (Tabel Penghubung webinars dan peserta)
+--
+CREATE TABLE `kehadiran` (
+  `id_peserta` int(11) NOT NULL,
+  `id_webinar` int(11) NOT NULL,
+  `status_kehadiran` enum('hadir','tidak_hadir') DEFAULT 'tidak_hadir',
+  `path_sertifikat` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_peserta`,`id_webinar`),
+  KEY `id_webinar` (`id_webinar`),
+  CONSTRAINT `kehadiran_ibfk_1` FOREIGN KEY (`id_peserta`) REFERENCES `peserta` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `kehadiran_ibfk_2` FOREIGN KEY (`id_webinar`) REFERENCES `webinars` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Struktur tabel untuk `users` (Anak dari anggota_ifws)
+--
+CREATE TABLE `users` (
+  `id_anggota` int(11) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  UNIQUE KEY `id_anggota` (`id_anggota`),
+  CONSTRAINT `users_ibfk_1` FOREIGN KEY (`id_anggota`) REFERENCES `anggota_ifws` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Struktur tabel untuk `webinar_narasumber` (Tabel Penghubung webinars dan narasumber)
+--
+CREATE TABLE `webinar_narasumber` (
+  `id_webinar` int(11) NOT NULL,
+  `id_narasumber` int(11) NOT NULL,
+  `path_sertifikat` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_webinar`,`id_narasumber`),
+  KEY `id_narasumber` (`id_narasumber`),
+  CONSTRAINT `webinar_narasumber_ibfk_1` FOREIGN KEY (`id_webinar`) REFERENCES `webinars` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `webinar_narasumber_ibfk_2` FOREIGN KEY (`id_narasumber`) REFERENCES `narasumber` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Mengisi data (INSERT)
+--
+
+-- Data `anggota_ifws` (Staf)
+INSERT INTO `anggota_ifws` (`id`, `nama_lengkap`, `email`, `role`) VALUES
+(1, 'Admin IFWS', 'admin@ifws.com', 'admin'),
+(2, 'Bendahara Demo', 'bendahara@ifws.com', 'bendahara'),
+(3, 'Teknisi Demo', 'teknisi@ifws.com', 'teknisi'),
+(4, 'Promosi Demo', 'promosi@ifws.com', 'promosi'),
+(5, 'Sekretaris Demo', 'sekretaris@ifws.com', 'sekretaris');
+
+-- Data `users` (Password Staf)
+INSERT INTO `users` (`id_anggota`, `password`) VALUES
+(1, 'admin123'),
+(2, 'bendahara123'),
+(3, 'teknisi123'),
+(4, 'promosi123'),
+(5, 'sekretaris123');
+
+-- Data `narasumber`
+INSERT INTO `narasumber` (`id`, `nama`, `email`) VALUES
+(1, 'JOHN DOE', 'johndoe@email.com'),
+(2, 'JOSH EVERMAN', 'josheverman@email.com'),
+(3, 'JOSHUA LAUWRICH', 'joshualauwrich@email.com'),
+(4, 'KEVIN HALIM', 'kevinhalim@email.com'),
+(5, 'JANE DOE', 'janedoe@email.com');
+
+-- Data `peserta`
+INSERT INTO `peserta` (`id`, `nama_lengkap`, `npm`, `email`, `password`, `status_ta`) VALUES
+(1, 'Benedictus Benny Lesmana', NULL, 'benedictus@ifws.com', 'peserta123', 'TA_2'),
+(2, 'James Carter', '6182101032', 'james.carter@example.com', 'peserta123', 'TA_2'),
+(3, 'Sophia Anderson', '6182101057', 'sophia.anderson@example.com', 'peserta123', 'TA_2'),
+(4, 'Ethan Mitchell', '6182101098', 'ethan.mitchell@example.com', 'peserta123', 'TA_1');
+
+-- Data `webinars`
+INSERT INTO `webinars` (`id`, `tanggal_direncanakan`, `jam_mulai`, `jam_selesai`, `kategori`, `topik`, `status`, `link_akses`, `poster_path`) VALUES
+(1, '2025-09-27', '10:45:00', '11:45:00', 'Umum', 'Sistem Informasi Apotek Adora', 'finished', NULL, NULL),
+(2, '2025-09-28', '10:45:00', '11:45:00', 'Internal', 'Dunia ERP dan Odoo', 'published', NULL, NULL),
+(3, '2025-09-29', '10:45:00', '11:45:00', 'Dosen', 'Advanced Database Systems', 'published', NULL, NULL),
+(4, '2025-10-10', '10:45:00', '11:45:00', 'Umum', 'Data Science Introduction', 'published', NULL, 'assets/posters/poster_4_1758941477.png'),
+(5, '2025-10-30', '10:45:00', '11:45:00', 'Umum', 'UI/UX Introduction', 'published', 'https://test.com', 'assets/posters/poster_5_1758941371.jpg'),
+(6, '2025-12-12', '10:45:00', '11:45:00', 'Umum', '101 Design Analysis and Algorithm', 'published', 'https://test.co.id', 'assets/posters/poster_6_1758942215.png'),
+(7, '2025-09-26', '14:00:00', '15:00:00', 'Umum', 'Software Quality Assurance', 'finished', 'https://tiny.cc/ifws', 'assets/posters/poster_7_1758970066.png'),
+(8, '2025-10-25', '14:00:00', '15:00:00', 'Umum', 'Test', 'published', NULL, NULL),
+(9, '2026-11-11', '10:45:00', '11:45:00', 'Umum', 'Testing v2', 'rencana', NULL, NULL),
+(10, '2025-07-11', '10:00:00', '12:00:00', 'Dosen', 'Testing Again', 'rencana', NULL, NULL),
+(11, '2025-11-06', '10:00:00', '12:00:00', 'Umum', 'Coba Lagi', 'rencana', NULL, NULL);
+
+-- Data `webinar_narasumber` (Penghubung)
+INSERT INTO `webinar_narasumber` (`id_webinar`, `id_narasumber`, `path_sertifikat`) VALUES
+(1, 1, NULL),
+(2, 2, NULL),
+(3, 2, NULL),
+(4, 1, NULL),
+(5, 2, NULL),
+(6, 1, NULL),
+(7, 3, NULL),
+(8, 1, NULL),
+(8, 5, NULL),
+(8, 3, NULL),
+(9, 1, NULL),
+(10, 2, NULL),
+(11, 3, NULL),
+(11, 4, NULL);
+
+-- Data `kehadiran` (Peserta yang sudah hadir)
+INSERT INTO `kehadiran` (`id_peserta`, `id_webinar`, `status_kehadiran`, `path_sertifikat`) VALUES
+(1, 1, 'hadir', NULL),
+(1, 7, 'hadir', NULL),
+(2, 7, 'hadir', NULL),
+(3, 1, 'hadir', NULL),
+(4, 7, 'tidak_hadir', NULL);
+
+-- Data `settings`
+INSERT INTO `settings` (`setting_key`, `setting_value`) VALUES
+('min_duration', '45'),
+('min_ifws_ta', '3');
+
+-- Mengaktifkan kembali pengecekan foreign key
+SET FOREIGN_KEY_CHECKS=1;
+
+<perubahan 11/13/2025>
+
+-- 1. Hapus tabel kehadiran, foto_pelaksanaan, dan bukti_insentif yang lama
+DROP TABLE IF EXISTS `kehadiran`;
+DROP TABLE IF EXISTS `foto_pelaksanaan`;
+DROP TABLE IF EXISTS `bukti_insentif`;
+
+-- 2. Hapus kolom path_sertifikat dari webinar_narasumber (jika ada)
+ALTER TABLE `webinar_narasumber`
+DROP COLUMN IF EXISTS `path_sertifikat`;
+
+-- 3. Buat tabel KEHADIRAN yang baru (SUPER TABLE)
+CREATE TABLE `kehadiran` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_webinar` int(11) NOT NULL,
+  `id_peserta` int(11) DEFAULT NULL,      -- Diisi jika role='peserta' & ada di tabel peserta
+  `id_narasumber` int(11) DEFAULT NULL, -- Diisi jika role='narasumber'
+  `nama_lengkap` varchar(255) NOT NULL, -- Nama dari CSV
+  `email` varchar(255) NOT NULL,
+  `role` enum('peserta','panitia','narasumber') NOT NULL DEFAULT 'peserta',
+  `durasi_kehadiran` int(11) DEFAULT 0,
+  `status_kehadiran` enum('hadir','tidak_hadir') DEFAULT 'tidak_hadir',
+  `override_sertifikat` tinyint(1) DEFAULT 0, -- 0 = false, 1 = true
+  `path_sertifikat` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_kehadiran` (`id_webinar`,`email`), -- Mencegah duplikasi per webinar
+  KEY `id_webinar` (`id_webinar`),
+  KEY `id_peserta` (`id_peserta`),
+  KEY `id_narasumber` (`id_narasumber`),
+  CONSTRAINT `kehadiran_ibfk_1` FOREIGN KEY (`id_webinar`) REFERENCES `webinars` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `kehadiran_ibfk_2` FOREIGN KEY (`id_peserta`) REFERENCES `peserta` (`id`) ON DELETE SET NULL,
+  CONSTRAINT `kehadiran_ibfk_3` FOREIGN KEY (`id_narasumber`) REFERENCES `narasumber` (`id`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- 4. Buat ulang tabel foto_pelaksanaan & bukti_insentif (jika Anda masih membutuhkannya)
+CREATE TABLE `foto_pelaksanaan` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_webinar` int(11) NOT NULL,
+  `file_path` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_webinar` (`id_webinar`),
+  CONSTRAINT `foto_pelaksanaan_ibfk_1` FOREIGN KEY (`id_webinar`) REFERENCES `webinars` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `bukti_insentif` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_webinar` int(11) NOT NULL,
+  `file_path` varchar(255) NOT NULL,
+  `tanggal_upload` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `id_webinar` (`id_webinar`),
+  CONSTRAINT `bukti_insentif_ibfk_1` FOREIGN KEY (`id_webinar`) REFERENCES `webinars` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- 5. Ubah nama file template (opsional, tapi disarankan)
+-- (Ini hanya komentar, Anda harus mengubah nama file secara manual di folder)
+-- Ubah /templates/template_sertifikat_peserta.php -> /templates/template_sertifikat.php
+-- Hapus /templates/template_sertifikat_narasumber.php
+
+ALTER TABLE `peserta`
+ADD COLUMN `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+
+ALTER TABLE `peserta`
+ADD COLUMN `reset_token` VARCHAR(255) NULL,
+ADD COLUMN `reset_expires` DATETIME NULL;
